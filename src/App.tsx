@@ -17,8 +17,6 @@ function App() {
     hobbies: ["Reading"],
 
   });
-  // const [hobbies, setHobbies] = useState(["Reading"]);
-  // const [newHobby, setNewHobby] = useState("");
 
   return (
     <div className="App" style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
@@ -49,6 +47,8 @@ function App() {
             <li key={index}>{hobby}</li>
           ))}
         </ul>
+        <button onClick={() => setUser({ ...user, city: "Hawassa"})}>Change City</button>
+        <button onClick={() => setUser({ ...user, hobbies: [...user.hobbies, "Coding"] })}>Add Hobby</button> 
       </section>
 
     </div>
