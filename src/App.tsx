@@ -59,39 +59,55 @@ function App() {
         <button onClick={() => setName(name === "Student" ? "Alex" : "Student")}>Toggle Name</button>
         <button onClick={() => setStudyHours(studyHours + 1)}>Add Study Hour</button>
         <button onClick={() => setIsOnline(!isOnline)}>Toggle Online Status</button>
+
+        {studyHours >= 5 && <p style={{ color: 'blue' }}>Great study progress today!</p>}
+
       </section>
 
       <section id="activity-score" style={{ marginBottom: '20px' }}>
         <h2>Activity Score</h2>
         {/* Feedback messages */}
-  {ActivityScore === 0 && <p style={{ color: 'red' }}>Score cannot go below zero.</p>}
-  {ActivityScore >= 5 && <p style={{ color: 'green' }}>Bravo! you got a high score.</p>}
-         <p><strong>Score:</strong> {ActivityScore}</p>
+        {ActivityScore === 0 && <p style={{ color: 'red' }}>Score cannot go below zero.</p>}
+        {ActivityScore >= 5 && <p style={{ color: 'green' }}>Bravo! you got a high score.</p>}
+        <p><strong>Score:</strong> {ActivityScore}</p>
         <button onClick={() => updateScore(1)}>+1</button>
 
         <button onClick={() => updateScore(-1)}>-1</button>
 
         <button onClick={() => updateScore(5)}>+5</button>
-       
+
 
         {/* <button onClick={() => setScore((prevScore) => prevScore + 1)}>+1 increment</button>
         <button onClick={() => setScore((prevScore) => prevScore - 1)}>-1 decrement</button>
         <button onClick={() => setScore((prevScore) => prevScore + 5)}>Increase by 5</button> */}
-        <button onClick={() => setScore(0)}>Reset Score</button> 
+        <button onClick={() => setScore(0)}>Reset Score</button>
       </section>
       <section id="user-profile">
         <h2>User Profile</h2>
         <p><strong>City:</strong> {user.city}</p>
+
         <ul>
-         <p><strong>Hobbies:</strong></p>
-          {user.hobbies.map((hobby, index) => (
-            <li key={index}>{hobby}</li>
-          ))}
+          {user.hobbies.length > 0 ? (
+            <ul>
+              <p><strong>Hobbies:</strong></p>
+              {user.hobbies.map((hobby, index) => (
+                <li key={index}>{hobby}</li>
+              ))}
+            </ul>
+          ) : (
+            <p style={{ color: 'red' }}>No hobbies added yet.</p>
+          )}
+
         </ul>
+
+        {/* {user.hobbies.length === 0 && <p style={{ color: 'red' }}>No hobbies added yet.</p>} */}
+
         <button onClick={() => setUser({ ...user, city: "Hawassa" })}>Change City</button>
+        <br /> <br />
         <button disabled={newHobbyInput.trim() === ""} onClick={() => { handleAddHobby() }}>
           Add Hobby
         </button>
+
 
         <input
           type="text"
@@ -99,6 +115,11 @@ function App() {
           value={newHobbyInput}
           onChange={(e) => setNewHobbyInput(e.target.value)}
         />
+        <br />
+        <br />
+        <button onClick={() => setUser({ ...user, hobbies: [] })}>
+          Clear All Hobbies
+        </button>
 
       </section>
 
